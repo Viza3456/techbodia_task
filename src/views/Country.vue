@@ -116,25 +116,19 @@ onMounted(() => {
 
           <template v-slot:body-cell-alt_spellings="props">
             <q-td :props="props" class="custom-no-wrap">
-              <div class="custom-long-text">
-                {{ props.row.altSpellings }}
-              </div>
+              {{ props.row.altSpellings }}
             </q-td>
           </template>
 
           <template v-slot:body-cell-idd="props">
             <q-td :props="props" class="custom-no-wrap">
-              <div class="custom-long-text">
-                {{ props.row.idd }}
-              </div>
+              {{ props.row.idd }}
             </q-td>
           </template>
 
           <template v-slot:body-cell-native_ame="props">
             <q-td :props="props" class="custom-no-wrap">
-              <div class="custom-long-text">
-                {{ props.row.name.nativeName }}
-              </div>
+              {{ props.row.name.nativeName }}
             </q-td>
           </template>
 
@@ -155,9 +149,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.custom-long-text {
-  width: 400px;
-}
 .custom-no-wrap {
   white-space: normal;
 }
