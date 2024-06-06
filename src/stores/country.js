@@ -13,6 +13,8 @@ export const countryStore = defineStore({
       pageIndex: 0,
       pageSize: 25
     },
+    showModalDetail: false,
+    form:{}
   }),
   actions: {
     fetchCountries() {
@@ -44,5 +46,9 @@ export const countryStore = defineStore({
         }
       );
     },
+    detailData(row){
+      this.showModalDetail = true;
+      this.form = {...row};
+    }
   },
 });

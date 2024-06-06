@@ -1,10 +1,16 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted , provide} from "vue";
 import { countryStore } from "stores/country";
 import { Input, Pagination } from "@/components/forms";
+import ModalDetail from "@/components/country/ModalDetail.vue";
+import { storeToRefs } from 'pinia';
 
-const { search } = countryStore();
 const stateCountry = countryStore();
+
+provide("state", stateCountry);
+
+const { search, countries, loading } = storeToRefs(stateCountry);
+
 const columns = ref([
   {
     name: "flags",
@@ -64,6 +70,7 @@ onMounted(() => {
 
 <template>
   <div class="q-ma-lg">
+    <ModalDetail />
     <q-card class="full-width">
       <q-card-section class="flex justify-between q-pb-sm">
         <div class="text-h6">Countries</div>
@@ -86,11 +93,11 @@ onMounted(() => {
           table-header-class="bg-primary text-white"
           flat
           bordered
-          :rows="stateCountry.countries || []"
+          :rows="countries"
           :columns="columns"
           row-key="name"
           color="amber"
-          :loading="stateCountry.loading"
+          :loading="loading"
           :rows-per-page-options="[0]"
           separator="cell"
         >
@@ -100,7 +107,7 @@ onMounted(() => {
 
           <template v-slot:body-cell-flags="props">
             <q-td :props="props" width="70">
-              <img
+              <q-img
                 :src="props.row.flags.png"
                 alt="Flag"
                 style="width: 32px; height: 32px"
@@ -109,26 +116,32 @@ onMounted(() => {
           </template>
 
           <template v-slot:body-cell-name="props">
-            <q-td :props="props">
+            <q-td :props="props" @click="stateCountry.detailData(props.row)" class="cursor-pointer">
               {{ props.row.name.official }}
             </q-td>
           </template>
 
           <template v-slot:body-cell-alt_spellings="props">
             <q-td :props="props" class="custom-no-wrap">
-              {{ props.row.altSpellings }}
+              <div class="custom-width">
+                {{ props.row.altSpellings }}
+              </div>
             </q-td>
           </template>
 
           <template v-slot:body-cell-idd="props">
             <q-td :props="props" class="custom-no-wrap">
-              {{ props.row.idd }}
+              <div class="custom-width">
+                {{ props.row.idd }}
+              </div>
             </q-td>
           </template>
 
           <template v-slot:body-cell-native_ame="props">
             <q-td :props="props" class="custom-no-wrap">
-              {{ props.row.name.nativeName }}
+              <div class="custom-width">
+                {{ props.row.name.nativeName }}
+              </div>
             </q-td>
           </template>
 
@@ -147,9 +160,3 @@ onMounted(() => {
     </q-card>
   </div>
 </template>
-
-<style scoped>
-.custom-no-wrap {
-  white-space: normal;
-}
-</style>

@@ -99,7 +99,7 @@ watch(
     pagination.value.currentPage = 1;
     calculatePage();
   },
-  { deep: true }
+  { deep: true, immediate:true }
 );
 </script>
 

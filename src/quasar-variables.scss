@@ -11,18 +11,25 @@ $primary: #1976d2;
     display: block;
 }
 
-::-webkit-scrollbar {
-    width: 12px;
-    height: 8px;
+.custom-no-wrap {
+    white-space: normal !important;
+    white-space: pre-wrap !important;
 }
-
-::-webkit-scrollbar-thumb {
-    background: #d3dce6;
-    border-radius: 10px;
+.custom-width{
+    min-width: 300px !important;
 }
-
 .sticky-header-table {
     max-height: 70vh;
+
+    ::-webkit-scrollbar {
+        width: 12px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #d3dce6;
+        border-radius: 10px;
+    }
 
     thead {
         position: sticky;
@@ -49,6 +56,10 @@ $primary: #1976d2;
     ::-webkit-scrollbar-thumb {
         background: #d3dce6;
         border-radius: 10px;
+    }
+
+    td{
+        vertical-align: top !important;
     }
 }
 
